@@ -22,6 +22,7 @@ item gentoo ${space} Gentoo Linux
 item rancheros ${space} RancherOS
 item scientific ${space} Scientific
 item slackware ${space} Slackware
+item solus ${space} Solus
 item tinycore ${space} Tiny Core Linux
 choose menu || goto linux_exit
 echo ${cls}
