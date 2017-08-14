@@ -1,0 +1,37 @@
+#!ipxe
+
+# Solus Operating System
+# https://solus-project.com/
+
+goto ${menu}
+
+:solus
+set os Solus
+menu ${os} Installers
+item --gap Official Releases
+item 2017.04.18.0 ${space} ${os} 2017.04.18.0
+choose solus_version|| goto solus_exit
+
+:solus_flavor
+menu ${os} ${solus_version} Installers
+item --gap Flavors
+item Budgie ${solus_version} Budgie
+item GNOME ${solus_version} Gnome
+item MATE ${solus_version} Mate
+choose --default ${type} flavor || goto solus
+echo ${cls}
+goto mirror_cfg
+
+:mirror_cfg
+set solus_initrd http://soluslond1iso.stroblindustries.com/Solus-${solus_version}-${flavor}.iso
+goto solus_boot
+
+:solus_boot
+kernel ${memdisk} iso raw
+initrd ${solus_initrd}
+boot
+goto solus_exit
+
+:solus_exit
+clear menu
+exit 0
